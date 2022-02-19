@@ -11,7 +11,7 @@ import Blogs from './pages/blogs';
 function App() {
 return (
     <Router>
-    <Navbar />
+  
     <Routes>
         <Route exact path='/' exact element={<Home />} />
         <Route path='/about' element={<About/>} />

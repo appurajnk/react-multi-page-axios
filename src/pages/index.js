@@ -1,6 +1,6 @@
 import React, {useEffect } from 'react';
 import DashboardClient from "api/Clients/DashboardClient";
-
+import "./index.module.css"
 const Home = () => {
 
   useEffect(() => {
@@ -21,111 +21,58 @@ const Home = () => {
 
 
   return (
-    <div>
-    <body>
-  <table>
-    <tr>
-      <td>
-        <div class="Rectangle-465">
-        <img src="/home/dell/Documents/photos/mifix.jpeg" class="Group-342"/>
-        <br><br>
-        <span class="Enter-Login-details">
+<>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"/>
 
-        <span class="text-style-1">Enter</span>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
 
-        <span class="text-style-2"></span>
-        <br/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"/>
 
-        Login details
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet"></link>
+<section className="vh-100">
+  <div className="container-fluid h-custom" style={{height: "90%"}}>
+    <div className="row d-flex justify-content-center align-items-center h-100">
+      <div className="col-md-9 col-lg-6 col-xl-5">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" className="img-fluid"
+          alt="Sample image"/>
+      </div>
+      <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form>
+        
 
-        </span>
-      <form>
-        <input type="text" class="Enter-employee-id" placeholder="Enter employee id"/>
-      </form>
-      <span class="Forgot-Employee-id">
+        
 
-    Forgot Employee id?
-  
-  </span>
-  <div class="Rectangle-57">
-    
+          <div className="form-outline mb-4">
+            <input type="email" id="form3Example3" className="form-control form-control-lg"
+              placeholder="Enter a valid email address" />
+   
+          </div>
 
-<a href="/home/dell/Documents/dev/AdminLTE-master/new/newproduct.html"><button type="button" class="button" onclick="this.classList.toggle('button--loading')">
-  <span class="button__text"></span>
-</button></a>
 
+         
 
     
-  </div>
-</td> 
-   <td>
-</div>
-<div class="Image">
-  <img src="/home/dell/Documents/dev/index.jpeg"/>
-  <p>End-End Transperancy</p>
-</div>
-</td>
-</tr>
-</table>
-<style>
+          <div className="text-center text-lg-start mt-4 pt-2">
+            <button type="button" className="btn btn-primary btn-lg"
+              style={{paddingLeft:"2.5rem", paddingRight: " 2.5rem"}}>Login</button>
+         
+          </div>
 
-
-.button {
-  position: relative;
-  padding: 8px 16px;
-  background: #009579;
-  border: none;
-  outline: none;
-  border-radius: 2px;
-  cursor: pointer;
-}
-
-.button:active {
-  background: #007a63;
-}
-
-.button__text {
-  font: bold 20px "Quicksand", san-serif;
-  color: #ffffff;
-  transition: all 0.2s;
-}
-
-.button--loading .button__text {
-  visibility: hidden;
-  opacity: 0;
-}
-
-.button--loading::after {
-  content: "";
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  border: 4px solid transparent;
-  border-top-color: #ffffff;
-  border-radius: 50%;
-  animation: button-loading-spinner 1s ease infinite;
-}
-
-@keyframes button-loading-spinner {
-  from {
-    transform: rotate(0turn);
-  }
-
-  to {
-    transform: rotate(1turn);
-  }
-}
-
-
-</style>
-
-</body>
+        </form>
+      </div>
     </div>
+  </div>
+  <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+
+    <div className="text-white mb-3 mb-md-0">
+      Copyright © 2020. All rights reserved.
+    </div>
+
+   
+  </div>
+</section>
+
+</>
   );
 };
   
