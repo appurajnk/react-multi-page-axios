@@ -38,7 +38,7 @@ const Home = () => {
 
           <div className="form-outline mb-4">
             <input type="email" id="form3Example3" className="form-control form-control-lg"
-              placeholder="Enter a valid email address" />
+              placeholder="Ented a Valid User-Id" />
    
           </div>
 
@@ -48,7 +48,7 @@ const Home = () => {
     
           <div className="text-center text-lg-start mt-4 pt-2">
             <button type="button" className="btn btn-primary btn-lg"
-              style={{paddingLeft:"2.5rem", paddingRight: " 2.5rem"}}>Create Profile</button>
+              style={{paddingLeft:"2.5rem", paddingRight: " 2.5rem"}}>Login</button>
          
           </div>
 
