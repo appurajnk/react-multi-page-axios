@@ -1,5 +1,5 @@
 import { ApiClient } from '../Middleware/apiClient'
-let client = new ApiClient("https://jsonplaceholder.typicode.com/")
+let client = new ApiClient(process.env.REACT_APP_API_BASE_URL)
 
 export default {
   getUserData(data) {
