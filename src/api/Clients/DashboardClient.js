@@ -5,4 +5,7 @@ export default {
   getUserData(data) {
     return client.get('users', data)
   },
+  validateUser(data){
+    return client.get('users', data)
+  }
 }
