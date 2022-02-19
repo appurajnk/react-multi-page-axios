@@ -38,7 +38,7 @@ const Home = () => {
 
           <div className="form-outline mb-4">
             <input type="email" id="form3Example3" className="form-control form-control-lg"
-              placeholder="Ented a Valid User-Id" />
+              placeholder="Ented a Valid User ID" />
    
           </div>
 
