@@ -6,6 +6,6 @@ export default {
     return client.get('users', data)
   },
   validateUser(data){
-    return client.get('users', data)
+    return client.get('users/'+data)
   }
 }

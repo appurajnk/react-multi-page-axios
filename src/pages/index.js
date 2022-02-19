@@ -1,24 +1,44 @@
 import React, {useEffect } from 'react';
 import DashboardClient from "api/Clients/DashboardClient";
-import "./index.module.css"
+import {toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import "./index.module.css";
+
 const Home = () => {
-
+  let [credential, setCredentailState] = React.useState("");
+  let [username, setUserName] = React.useState("");
+  const navigate = useNavigate();
   useEffect(() => {
-
-    getUserData();
-   
     
   });
 
 
-
-  const getUserData = async () => 
+  const loginValidate = async () => 
   {
-    const response =await DashboardClient.getUserData()
-    console.log("Appu",response.data)
+ 
+
+
+    const response =await DashboardClient.validateUser(credential)
+
+    if(response!=undefined && response.data.response.lastname!=undefined)
+    {
+     
+      setUserName(response.data.response.lastname)
+      navigate("/dashboard");
+    }
+    else{
+      console.log("Invalid credentials");
+    }
+   
+    
 
   }
+const setCredentails = async (e) => 
+{
+  console.log(e.target.value);
+  setCredentailState(e.target.value);
 
+}
 
   return (
 <>
@@ -38,7 +58,7 @@ const Home = () => {
 
           <div className="form-outline mb-4">
             <input type="email" id="form3Example3" className="form-control form-control-lg"
-              placeholder="Ented a Valid User ID" />
+              placeholder="Ented a Valid User ID" onChange={(e)=>setCredentails(e)} />
    
           </div>
 
@@ -48,7 +68,7 @@ const Home = () => {
     
           <div className="text-center text-lg-start mt-4 pt-2">
             <button type="button" className="btn btn-primary btn-lg"
-              style={{paddingLeft:"2.5rem", paddingRight: " 2.5rem"}}>Login</button>
+              style={{paddingLeft:"2.5rem", paddingRight: " 2.5rem"}}  onClick={(e) => loginValidate()}>Login</button>
          
           </div>
 
