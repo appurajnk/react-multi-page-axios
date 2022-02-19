@@ -54,7 +54,7 @@ const Home = () => {
     
           <div className="text-center text-lg-start mt-4 pt-2">
             <button type="button" className="btn btn-primary btn-lg"
-              style={{paddingLeft:"2.5rem", paddingRight: " 2.5rem"}}>Login</button>
+              style={{paddingLeft:"2.5rem", paddingRight: " 2.5rem"}}>Create Profile</button>
          
           </div>
 
