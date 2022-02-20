@@ -15471,8 +15471,11 @@ fieldset:disabled .btn {
   display: table-cell !important;
 }
 
+
+
 .d-flex, .list-wrapper ul li, .navbar .navbar-menu-wrapper .navbar-nav, .navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-profile, .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .navbar-dropdown .dropdown-item, .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .navbar-dropdown .dropdown-item .item-thumbnail .item-icon, .navbar .navbar-menu-wrapper .navbar-nav.navbar-nav-right .nav-item {
   display: flex !important;
+  
 }
 
 .d-inline-flex {
@@ -15481,6 +15484,7 @@ fieldset:disabled .btn {
 
 .d-none, .navbar .navbar-menu-wrapper .navbar-nav.navbar-nav-right .nav-item.nav-settings {
   display: none !important;
+
 }
 
 .shadow {
