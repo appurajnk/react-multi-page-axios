@@ -1,6 +1,34 @@
-import React from 'react';
-  
+import {React,useEffect,useState} from 'react';
+import DashboardClient from "api/Clients/DashboardClient";
+import {toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import "./index.module.css";
+import styles from "./dashboard.module.css";
+import LoanGraph from "components/graph/LoanGraph"
+
+
 const Dashboard = () => {
+
+  let [LoanCount, setLoanCount] = useState(0);
+
+const getDashboardData=async ()=>{
+  const response =await DashboardClient.getLoanCount();
+
+  if(response.status==200)
+  {
+    console.log(response.data);
+
+    setLoanCount(response.data.response[0].query1[0].count)
+
+  }
+ 
+ 
+}
+  useEffect(() => {
+
+    getDashboardData();
+
+  });
   return (
     <>
     
@@ -12,11 +40,11 @@ const Dashboard = () => {
     </div>
 
     <nav className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-      <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a className="navbar-brand brand-logo me-5" href="index.html"><img src="images/logo.svg" className="me-2" alt="logo"/></a>
-        <a className="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
+      <div className={`${styles['nithi']} text-center navbar-brand-wrapper d-flex align-items-center justify-content-center`}>
+        <a className="navbar-brand brand-logo me-5" href="#"><img src="./../logo.png" className="me-2" style={{height:"50px",width:"150px"}} alt="logo"/></a>
+        <a className="navbar-brand brand-logo-mini" href="#"><img src="./../logo.png" alt="logo"/></a>
       </div>
-      <div className="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+      <div className="navbar-menu-wrapper d-flex align-items-center justify-content-end" style={{backgroundColor:"#0072ff"}}>
         <button className="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span className="ti-view-list"></span>
         </button>
@@ -41,7 +69,7 @@ const Dashboard = () => {
               <p className="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
               <a className="dropdown-item">
                 <div className="item-thumbnail">
-                    <img src="images/faces/face4.jpg" alt="image" className="profile-pic"/>
+                    <img src="./../profile.png" alt="image" className="profile-pic"/>
                 </div>
                 <div className="item-content flex-grow">
                   <h6 className="ellipsis font-weight-normal">David Grey
@@ -78,10 +106,10 @@ const Dashboard = () => {
             </div>
           </li>
           <li className="nav-item dropdown">
-            <a className="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+            {/* <a className="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
               <i className="ti-bell mx-0"></i>
               <span className="count"></span>
-            </a>
+            </a> */}
             <div className="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
               <p className="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
               <a className="dropdown-item">
@@ -127,7 +155,7 @@ const Dashboard = () => {
           </li>
           <li className="nav-item nav-profile dropdown">
             <a className="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-              <img src="images/faces/face28.jpg" alt="profile"/>
+              <img src="./../profile.png" alt="profile" style={{height:"33px"}}/>
             </a>
             <div className="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a className="dropdown-item">
@@ -152,7 +180,7 @@ const Dashboard = () => {
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
         <ul className="nav">
           <li className="nav-item">
-            <a className="nav-link" href="index.html">
+            <a className="nav-link" href="#">
               <i className="ti-shield menu-icon"></i>
               <span className="menu-title">Dashboard</span>
             </a>
@@ -239,9 +267,9 @@ const Dashboard = () => {
             <div className="col-md-3 grid-margin stretch-card">
               <div className="card">
                 <div className="card-body">
-                  <p className="card-title text-md-center text-xl-left">Sales</p>
+                  <p className="card-title text-md-center text-xl-left">Loan Count</p>
                   <div className="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                    <h3 className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">34040</h3>
+                    <h3 className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">{LoanCount}</h3>
                     <i className="ti-calendar icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
                   </div>  
                   <p className="mb-0 mt-2 text-danger">0.12% <span className="text-black ms-1"><small>(30 days)</small></span></p>
@@ -286,59 +314,17 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-6 grid-margin stretch-card">
+            <div className="col-md-12 grid-margin stretch-card">
               <div className="card">
                 <div className="card-body">
-                  <p className="card-title">Sales details</p>
-                  <p className="text-muted font-weight-light">Received overcame oh sensible so at an. Formed do change merely to county it. Am separate contempt domestic to to oh. On relation my so addition branched.</p>
-                  <div id="sales-legend" className="chartjs-legend mt-4 mb-2"></div>
-                  <canvas id="sales-chart"></canvas>
+                
+               
+      <LoanGraph></LoanGraph>
                 </div>
-                <div className="card border-right-0 border-left-0 border-bottom-0">
-                  <div className="d-flex justify-content-center justify-content-md-end">
-                    <div className="dropdown flex-md-grow-1 flex-xl-grow-0">
-                      <button className="btn btn-lg btn-outline-light dropdown-toggle rounded-0 border-top-0 border-bottom-0" type="button" id="dropdownMenuDate2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Today
-                      </button>
-                      <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                        <a className="dropdown-item" href="#">January - March</a>
-                        <a className="dropdown-item" href="#">March - June</a>
-                        <a className="dropdown-item" href="#">June - August</a>
-                        <a className="dropdown-item" href="#">August - November</a>
-                      </div>
-                    </div>
-                    <button className="btn btn-lg btn-outline-light text-primary rounded-0 border-0 d-none d-md-block" type="button"> View all </button>
-                  </div>
-                </div>
+              
               </div>
             </div>
-            <div className="col-md-6 grid-margin stretch-card">
-              <div className="card border-bottom-0">
-                <div className="card-body pb-0">
-                  <p className="card-title">Purchases</p>
-                  <p className="text-muted font-weight-light">The argument in favor of using filler text goes something like this: If you use real content in the design process, anytime you reach a review</p>
-                  <div className="d-flex flex-wrap mb-5">
-                    <div className="me-5 mt-3">
-                      <p className="text-muted">Status</p>
-                      <h3>362</h3>
-                    </div>
-                    <div className="me-5 mt-3">
-                      <p className="text-muted">New users</p>
-                      <h3>187</h3>
-                    </div>
-                    <div className="me-5 mt-3">
-                      <p className="text-muted">Chats</p>
-                      <h3>524</h3>
-                    </div>
-                    <div className="mt-3">
-                      <p className="text-muted">Feedbacks</p>
-                      <h3>509</h3>
-                    </div> 
-                  </div>
-                </div>
-                <canvas id="order-chart" className="w-100"></canvas>
-              </div>
-            </div>
+            
           </div>
           <div className="row">
             <div className="col-md-7 grid-margin stretch-card">

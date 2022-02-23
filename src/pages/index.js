@@ -29,7 +29,7 @@ const Home = () => {
       alert("Invalid credentials");
     }
    
-    
+     
 
   }
 const setCredentails = async (e) => 
@@ -50,7 +50,7 @@ const setCredentails = async (e) =>
           <div class="col-lg-6 d-flex align-items-center justify-content-center">
             <div class="auth-form-transparent text-left p-3">
               <div class="brand-logo">
-                <img src="C:\Users\nithe\OneDrive\Pictures" alt="logo"/>
+                <img src="./../logo.png" style={{width:"200px",height:"60px"}} alt="logo"/>
               </div>
               <h4>Welcome back!</h4>
               <h6 class="font-weight-light">Happy to see you again!</h6>

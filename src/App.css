@@ -15478,13 +15478,15 @@ fieldset:disabled .btn {
   
 }
 
+
+
 .d-inline-flex {
   display: inline-flex !important;
 }
 
 .d-none, .navbar .navbar-menu-wrapper .navbar-nav.navbar-nav-right .nav-item.nav-settings {
   display: none !important;
-
+  
 }
 
 .shadow {

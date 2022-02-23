@@ -7,5 +7,9 @@ export default {
   },
   validateUser(data){
     return client.get('users/'+data)
+  },
+  getLoanCount(data)
+  {
+    return client.get('loantotal',data)
   }
 }
