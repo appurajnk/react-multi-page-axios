@@ -10,15 +10,26 @@ import LoanGraph from "components/graph/LoanGraph"
 const Dashboard = () => {
 
   let [LoanCount, setLoanCount] = useState(0);
+  let [LoanDisbursed, setLoanDisbursed] = useState(0);
+  let [PortfolioOutanding, setPortfolioOutstanding] = useState(0);
 
 const getDashboardData=async ()=>{
   const response =await DashboardClient.getLoanCount();
+  const responseDisbursed = await DashboardClient.getLoanDisbursed();
+  const responseOutstanding = await DashboardClient.getPortfolioOutstanding();
 
   if(response.status==200)
   {
     console.log(response.data);
+    console.log(responseDisbursed.data);
+    console.log(responseOutstanding.data);
 
     setLoanCount(response.data.response[0].query1[0].count)
+    
+    setLoanDisbursed(responseDisbursed.data.response[0].total)
+
+    setPortfolioOutstanding(responseOutstanding.data.response[0].total)
+
 
   }
  
@@ -44,7 +55,7 @@ const getDashboardData=async ()=>{
         <a className="navbar-brand brand-logo me-5" href="#"><img src="./../logo.png" className="me-2" style={{height:"50px",width:"150px"}} alt="logo"/></a>
         <a className="navbar-brand brand-logo-mini" href="#"><img src="./../logo.png" alt="logo"/></a>
       </div>
-      <div className="navbar-menu-wrapper d-flex align-items-center justify-content-end" style={{backgroundColor:"#0072ff"}}>
+      <div className="navbar-menu-wrapper d-flex align-items-center justify-content-end" >
         <button className="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span className="ti-view-list"></span>
         </button>
@@ -279,9 +290,9 @@ const getDashboardData=async ()=>{
             <div className="col-md-3 grid-margin stretch-card">
               <div className="card">
                 <div className="card-body">
-                  <p className="card-title text-md-center text-xl-left">Revenue</p>
+                  <p className="card-title text-md-center text-xl-left">Loan Disbursed</p>
                   <div className="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                    <h3 className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">47033</h3>
+                    <h3 className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">{LoanDisbursed}</h3>
                     <i className="ti-user icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
                   </div>  
                   <p className="mb-0 mt-2 text-danger">0.47% <span className="text-black ms-1"><small>(30 days)</small></span></p>
@@ -291,9 +302,9 @@ const getDashboardData=async ()=>{
             <div className="col-md-3 grid-margin stretch-card">
               <div className="card">
                 <div className="card-body">
-                  <p className="card-title text-md-center text-xl-left">Downloads</p>
+                  <p className="card-title text-md-center text-xl-left">Portfolio Outstanding</p>
                   <div className="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                    <h3 className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">40016</h3>
+                    <h3 className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">{PortfolioOutanding}</h3>
                     <i className="ti-agenda icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
                   </div>  
                   <p className="mb-0 mt-2 text-success">64.00%<span className="text-black ms-1"><small>(30 days)</small></span></p>
@@ -303,9 +314,9 @@ const getDashboardData=async ()=>{
             <div className="col-md-3 grid-margin stretch-card">
               <div className="card">
                 <div className="card-body">
-                  <p className="card-title text-md-center text-xl-left">Returns</p>
+                  <p className="card-title text-md-center text-xl-left">Portfolio Outstanding</p>
                   <div className="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                    <h3 className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">61344</h3>
+                    <h3 className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">{PortfolioOutanding / LoanDisbursed* 100}</h3>
                     <i className="ti-layers-alt icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
                   </div>  
                   <p className="mb-0 mt-2 text-success">23.00%<span className="text-black ms-1"><small>(30 days)</small></span></p>

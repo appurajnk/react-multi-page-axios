@@ -11,5 +11,13 @@ export default {
   getLoanCount(data)
   {
     return client.get('loantotal',data)
+  },
+  getLoanDisbursed(data)
+  {
+      return client.get('loans',data)
+  },
+  getPortfolioOutstanding(data)
+  {
+    return client.get('outstanding',data)
   }
-}
+  }
