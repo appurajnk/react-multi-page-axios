@@ -9888,10 +9888,18 @@ progress {
     flex: 0 0 auto;
     width: 41.66667%;
   }
-  .col-lg-6 {
+  .col-lg-6  {
     flex: 0 0 auto;
     width: 50%;
+    
   }
+
+  .col-lg-6 right-index d-flex flex-row
+{
+  background-color: gray;
+}
+  
+
   .col-lg-7 {
     flex: 0 0 auto;
     width: 58.33333%;

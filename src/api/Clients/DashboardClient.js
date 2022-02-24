@@ -19,5 +19,9 @@ export default {
   getPortfolioOutstanding(data)
   {
     return client.get('outstanding',data)
+  },
+  getAmountSeries(data)
+  {
+    return client.get('yearupdates',data)
   }
   }

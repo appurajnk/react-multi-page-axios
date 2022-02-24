@@ -58,7 +58,7 @@ const setCredentails = async (e) =>
                 <div class="form-group">
                   <label for="exampleInputEmail">Username</label>
                   <div class="input-group">
-                    <input type="email" id="form3Example3" className="form-control form-control-lg"
+                    <input type="text" id="form3Example3" className="form-control form-control-lg"
                     placeholder="Ented a Valid User ID" onChange={(e)=>setCredentails(e)} />                 
                   </div>
                 </div>
@@ -81,8 +81,7 @@ const setCredentails = async (e) =>
               </form>
             </div>
           </div>
-          <div class="col-lg-6 login-half-bg d-flex flex-row">
-            <p class="text-white font-weight-medium text-center flex-grow align-self-end">Copyright &copy; 2021  All rights reserved.</p>
+          <div class="col-lg-6  d-flex flex-row">
           </div>
         </div>
       </div>

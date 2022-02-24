@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import Highcharts from "highcharts";
 // Import our demo components
 import Chart from "components/graph/Chart.js";
@@ -6,88 +6,93 @@ import Chart from "components/graph/Chart.js";
 require("highcharts/modules/exporting")(Highcharts);
 
 
-const chartOptions = {
-    chart: {
-        zoomType: 'xy'
-      },
-      title: {
-        text: 'Average Monthly Temperature and Rainfall in Tokyo'
-      },
-      subtitle: {
-        text: 'Source: WorldClimate.com'
-      },
-      xAxis: [{
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        crosshair: true
-      }],
-      yAxis: [{ // Primary yAxis
-        labels: {
-          format: '{value}°C',
-          style: {
-            color: Highcharts.getOptions().colors[1]
-          }
-        },
-        title: {
-          text: 'Temperature',
-          style: {
-            color: Highcharts.getOptions().colors[1]
-          }
-        }
-      }, { // Secondary yAxis
-        title: {
-          text: 'Rainfall',
-          style: {
-            color: Highcharts.getOptions().colors[0]
-          }
-        },
-        labels: {
-          format: '{value} mm',
-          style: {
-            color: Highcharts.getOptions().colors[0]
-          }
-        },
-        opposite: true
-      }],
-      tooltip: {
-        shared: true
-      },
-      legend: {
-        layout: 'vertical',
-        align: 'left',
-        x: 120,
-        verticalAlign: 'top',
-        y: 100,
-        floating: true,
-        backgroundColor:
-          Highcharts.defaultOptions.legend.backgroundColor || // theme
-          'rgba(255,255,255,0.25)'
-      },
-      series: [{
-        name: 'Rainfall',
-        type: 'column',
-        yAxis: 1,
-        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
-        tooltip: {
-          valueSuffix: ' mm'
-        }
+
+
+
+const LoanGraph = ({amount,month}) => {
+      console.log("amount-prop",amount) 
+      console.log("month-prop",month) 
+
+
+
+      const chartOptions = {
+
+
+        chart: {
+            zoomType: 'xy'
+          },
+          title: {
+            text: 'Sales Details'
+          },
     
-      }, {
-        name: 'Temperature',
-        type: 'spline',
-        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
-        tooltip: {
-          valueSuffix: '°C'
-        }
-      }]
-  };
-const LoanGraph = () => (
+          xAxis: [{
+            categories: month,
+            crosshair: true
+          }],
+          yAxis: [{ // Primary yAxis
+            labels: {
+              format: '{value}',
+              style: {
+                color: Highcharts.getOptions().colors[1]
+              }
+            },
+            title: {
+              text: 'Amount',
+              style: {
+                color: Highcharts.getOptions().colors[1]
+              }
+            }
+          }, { // Secondary yAxis
+            title: {
+              text: "",
+              style: {
+                color: Highcharts.getOptions().colors[0]
+              }
+            },
+            labels: {
+              format: '{value} ',
+              style: {
+                color: Highcharts.getOptions().colors[0]
+              }
+            },
+            opposite: true
+          }],
+          tooltip: {
+            shared: true
+          },
+          legend: {
+            layout: 'vertical',
+            align: 'left',
+            x: 120,
+            verticalAlign: 'top',
+            y: 100,
+            floating: true,
+            backgroundColor:
+              Highcharts.defaultOptions.legend.backgroundColor || // theme
+              'rgba(255,255,255,0.25)'
+          },
+          series: [{
+            name: 'Rainfall',
+            type: 'column',
+            yAxis: 1,
+            data: amount
+        
+          }, {
+            name: 'Amount',
+            type: 'spline',
+            data: amount
+          }]
+      };
+
+return(
     <div>
     
       <h1>Loan Over View</h1>
       <h4>Loans Type</h4>    
       <Chart options={chartOptions} highcharts={Highcharts} />
     </div>
-  );
+);
+
+};
 
   export default LoanGraph;

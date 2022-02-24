@@ -9,15 +9,36 @@ import LoanGraph from "components/graph/LoanGraph"
 
 const Dashboard = () => {
 
-  let [LoanCount, setLoanCount] = useState(0);
-  let [LoanDisbursed, setLoanDisbursed] = useState(0);
-  let [PortfolioOutanding, setPortfolioOutstanding] = useState(0);
+  const [LoanCount, setLoanCount] = useState(0);
+  const [LoanDisbursed, setLoanDisbursed] = useState(0);
+  const [PortfolioOutanding, setPortfolioOutstanding] = useState(0);
+
+  var month_array=[];
+  var amount_array=[];
+
 
 const getDashboardData=async ()=>{
   const response =await DashboardClient.getLoanCount();
   const responseDisbursed = await DashboardClient.getLoanDisbursed();
   const responseOutstanding = await DashboardClient.getPortfolioOutstanding();
 
+  const responseGraph =await DashboardClient.getAmountSeries();
+
+  if(responseGraph.status==200)
+  {
+    // console.log("graph data",response.data.response)
+    for (var i=0;i<responseGraph.data.response.length;i++)
+    {
+      
+      month_array.push(responseGraph.data.response[i].month)
+      amount_array.push(responseGraph.data.response[i].amount)
+  
+    }
+
+   
+    
+  }
+  
   if(response.status==200)
   {
     console.log(response.data);
@@ -32,12 +53,39 @@ const getDashboardData=async ()=>{
 
 
   }
- 
- 
+  // var LoanPercentage = PortfolioOutanding / LoanDisbursed* 100
+  //getGraphdData();
 }
+
+// const getGraphdData=async ()=>{
+//   console.log('hello');
+//   const response =await DashboardClient.getAmountSeries();
+  
+
+//   if(response.status==200)
+// {
+//   // console.log("graph data",response.data.response)
+//   for (var i=0;i<response.data.response.length;i++)
+//   {
+    
+//     month_array.push(response.data.response[i].month)
+//     amount_array.push(response.data.response[i].amount)
+
+//   }
+//   console.log("Month Array",month_array)
+//   console.log("Amount Array",amount_array)
+//   setAmount(amount_array)
+//   setMonth(month_array)
+  
+// }
+
+// }
+
+
   useEffect(() => {
 
     getDashboardData();
+
 
   });
   return (
@@ -186,20 +234,20 @@ const getDashboardData=async ()=>{
       </div>
     </nav>
 
-    <div className="container-fluid page-body-wrapper">
+    <div className="container-fluid page-body-wrapper" >
 
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
         <ul className="nav">
           <li className="nav-item">
             <a className="nav-link" href="#">
               <i className="ti-shield menu-icon"></i>
-              <span className="menu-title">Dashboard</span>
+              <span className="menu-title" >Dashboard</span>
             </a>
           </li>
           <li className="nav-item">
             <a className="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i className="ti-palette menu-icon"></i>
-              <span className="menu-title">UI Elements</span>
+              <span className="menu-title">Partners Page</span>
               <i className="menu-arrow"></i>
             </a>
             <div className="collapse" id="ui-basic">
@@ -212,16 +260,16 @@ const getDashboardData=async ()=>{
           <li className="nav-item">
             <a className="nav-link" href="pages/forms/basic_elements.html">
               <i className="ti-layout-list-post menu-icon"></i>
-              <span className="menu-title">Form elements</span>
+              <span className="menu-title">News Stat</span>
             </a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="pages/charts/chartjs.html">
               <i className="ti-pie-chart menu-icon"></i>
-              <span className="menu-title">Charts</span>
+              <span className="menu-title">Logout</span>
             </a>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <a className="nav-link" href="pages/tables/basic-table.html">
               <i className="ti-view-list-alt menu-icon"></i>
               <span className="menu-title">Tables</span>
@@ -254,9 +302,10 @@ const getDashboardData=async ()=>{
               <i className="ti-write menu-icon"></i>
               <span className="menu-title">Documentation</span>
             </a>
-          </li>
+          </li> */}
         </ul>
       </nav>
+      
 
       <div className="main-panel">
         <div className="content-wrapper">
@@ -264,26 +313,100 @@ const getDashboardData=async ()=>{
             <div className="col-md-12 grid-margin">
               <div className="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 className="font-weight-bold mb-0">RoyalUI Dashboard</h4>
+                <h4 className="font-weight-bold mb-0">Joint Liability Group</h4>
                 </div>
-                <div>
+                {/* <div>
                     <button type="button" className="btn btn-primary btn-icon-text btn-rounded">
                       <i className="ti-clipboard btn-icon-prepend"></i>Report
                     </button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
           <div className="row">
+            <div className="col-md-4 grid-margin stretch-card">
+              <div className="card">
+                <div className="card-body">
+                  <p className="card-title text-md-center text-xl-left">Yesterday</p>
+                  <div className="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                    <table cellSpacing="50">
+                    <tr>
+                    <td>
+                    <p>Loan Disbursed</p></td>
+                    <td><p>Loans</p></td>
+                    </tr>
+                    <tr>
+                    <td>
+                    <p className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">34,700</p></td>
+                    <td><p>20</p></td>
+                    </tr>
+                    </table>
+                    <i className="ti-calendar icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                  </div>  
+                  <p className="mb-0 mt-2 text-danger">Target<span className="text-black ms-1"><small>2,00,000</small></span></p>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-4 grid-margin stretch-card">
+              <div className="card">
+                <div className="card-body">
+                  <p className="card-title text-md-center text-xl-left">Today</p>
+                  <div className="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                  <table cellSpacing="50">
+                    <tr>
+                    <td>
+                    <p>Loan Disbursed</p></td>
+                    <td><p>Loans</p></td>
+                    </tr>
+                    <tr>
+                    <td>
+                    <p className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">34,700</p></td>
+                    <td><p>20</p></td>
+                    </tr>
+                    </table>
+                    <i className="ti-user icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                  </div>  
+                  <p className="mb-0 mt-2 text-danger">Target<span className="text-black ms-1"><small>3,00,000</small></span></p>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-4 grid-margin stretch-card">
+              <div className="card">
+                <div className="card-body">
+                  <p className="card-title text-md-center text-xl-left" >Month</p>
+                  <div className="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                  <table cellSpacing="50">
+                    <tr>
+                    <td>
+                    <p>Loan Disbursed</p></td>
+                    <td><p>Loans</p></td>
+                    </tr>
+                    <tr>
+                    <td>
+                    <p className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">3,00,00,000</p></td>
+                    <td><p>200</p></td>
+                    </tr>
+                    </table>
+                    <i className="ti-agenda icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                  </div>  
+                  <p className="mb-0 mt-2 text-success">Target<span className="text-black ms-1"><small>5,00,00,000</small></span></p>
+                </div>
+              </div>
+            </div>
+      
+          </div>
+          <h4 className="font-weight-bold mb-0">Portfolio</h4>
+          <br></br>
+          <div className="row">
             <div className="col-md-3 grid-margin stretch-card">
               <div className="card">
                 <div className="card-body">
-                  <p className="card-title text-md-center text-xl-left">Loan Count</p>
+                  <p className="card-title text-md-center text-xl-left">Active Loans</p>
                   <div className="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
                     <h3 className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">{LoanCount}</h3>
                     <i className="ti-calendar icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
                   </div>  
-                  <p className="mb-0 mt-2 text-danger">0.12% <span className="text-black ms-1"><small>(30 days)</small></span></p>
+                  {/* <p className="mb-0 mt-2 text-danger">0.12% <span className="text-black ms-1"><small>(30 days)</small></span></p> */}
                 </div>
               </div>
             </div>
@@ -295,31 +418,31 @@ const getDashboardData=async ()=>{
                     <h3 className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">{LoanDisbursed}</h3>
                     <i className="ti-user icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
                   </div>  
-                  <p className="mb-0 mt-2 text-danger">0.47% <span className="text-black ms-1"><small>(30 days)</small></span></p>
+                  {/* <p className="mb-0 mt-2 text-danger">0.47% <span className="text-black ms-1"><small>(30 days)</small></span></p> */}
                 </div>
               </div>
             </div>
             <div className="col-md-3 grid-margin stretch-card">
               <div className="card">
                 <div className="card-body">
-                  <p className="card-title text-md-center text-xl-left">Portfolio Outstanding</p>
+                  <p className="card-title text-md-center text-xl-left" >Portfolio Outstanding </p>
                   <div className="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
                     <h3 className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">{PortfolioOutanding}</h3>
                     <i className="ti-agenda icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
                   </div>  
-                  <p className="mb-0 mt-2 text-success">64.00%<span className="text-black ms-1"><small>(30 days)</small></span></p>
+                  {/* <p className="mb-0 mt-2 text-success">64.00%<span className="text-black ms-1"><small>(30 days)</small></span></p> */}
                 </div>
               </div>
             </div>
             <div className="col-md-3 grid-margin stretch-card">
               <div className="card">
                 <div className="card-body">
-                  <p className="card-title text-md-center text-xl-left">Portfolio Outstanding</p>
+                  <p className="card-title text-md-center text-xl-left">Portfolio Ratio</p>
                   <div className="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
-                    <h3 className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">{PortfolioOutanding / LoanDisbursed* 100}</h3>
+                    <h3 className="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">{(PortfolioOutanding / LoanDisbursed* 100).toFixed(2)}</h3>
                     <i className="ti-layers-alt icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
                   </div>  
-                  <p className="mb-0 mt-2 text-success">23.00%<span className="text-black ms-1"><small>(30 days)</small></span></p>
+                  {/* <p className="mb-0 mt-2 text-success">23.00%<span className="text-black ms-1"><small>(30 days)</small></span></p> */}
                 </div>
               </div>
             </div>
@@ -330,13 +453,14 @@ const getDashboardData=async ()=>{
                 <div className="card-body">
                 
                
-      <LoanGraph></LoanGraph>
+      <LoanGraph amount={amount_array} month={month_array}></LoanGraph>
                 </div>
               
               </div>
             </div>
             
           </div>
+          
           <div className="row">
             <div className="col-md-7 grid-margin stretch-card">
               <div className="card">
